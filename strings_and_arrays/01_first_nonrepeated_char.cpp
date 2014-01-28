@@ -7,22 +7,22 @@
 //
 
 #include <iostream>
-#include <set>
+#include <map>
 using namespace std;
 
 char firstNonrepeated(string s) {
-    set<char> nonRepeated;
+    map<char, int> nonRepeated;
     for (int i = 0; i < s.length(); i++) {
-        if (nonRepeated.count(s[i]) == 0) {
-            nonRepeated.insert(s[i]);
+        if (nonRepeated[s[i]] == 0) {
+            nonRepeated[s[i]] = 1;
         }
         else {
-            nonRepeated.erase(s[i]);
+            nonRepeated[s[i]] += 1;
         }
     }
     
     for (int i = 0; i < s.length(); i++) {
-        if (nonRepeated.count(s[i]) != 0) {
+        if (nonRepeated[s[i]] == 1) {
             return s[i];
         }
     }
@@ -33,7 +33,7 @@ char firstNonrepeated(string s) {
 int main(int argc, const char * argv[])
 {
 
-    cout << firstNonrepeated("racecar") << endl;
+    cout << firstNonrepeated("racecarr") << endl;
     
     try {
         firstNonrepeated("bbuutt");
